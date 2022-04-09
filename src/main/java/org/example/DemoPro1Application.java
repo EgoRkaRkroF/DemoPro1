@@ -1,8 +1,10 @@
 package org.example;
 
 import io.dropwizard.Application;
+import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.example.resources.TestResource;
 
 public class DemoPro1Application extends Application<DemoPro1Configuration> {
 
@@ -23,7 +25,10 @@ public class DemoPro1Application extends Application<DemoPro1Configuration> {
     @Override
     public void run(final DemoPro1Configuration configuration,
                     final Environment environment) {
-        System.out.println("data !!");
+        JerseyEnvironment jerseyEnvironment = environment.jersey();
+
+        TestResource testResource = new TestResource();
+        jerseyEnvironment.register(testResource);
     }
 
 }
