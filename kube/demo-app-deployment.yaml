@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-app-deployment
+  name: demo-app
 spec:
   selector:
     matchLabels:
@@ -17,3 +17,10 @@ spec:
           image: demo-project:v1
           ports:
             - containerPort: 9098
+          volumeMounts:
+            - name: config-volume
+              mountPath: /home/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: application-config
